@@ -1,6 +1,7 @@
 use super::packing::*;
 
 impl PackedStruct<[u8; 1]> for bool {
+    const BYTES: usize = 1;
     #[inline]
     fn pack(&self) -> [u8; 1] {
         if *self { [1] } else { [0] }
@@ -29,6 +30,7 @@ packing_slice!(bool; 1);
 
 
 impl PackedStruct<[u8; 1]> for u8 {
+    const BYTES: usize = 1;
     #[inline]
     fn pack(&self) -> [u8; 1] {
         [*self]
@@ -52,6 +54,7 @@ packing_slice!(u8; 1);
 
 
 impl PackedStruct<[u8; 1]> for i8 {
+    const BYTES: usize = 1;
     #[inline]
     fn pack(&self) -> [u8; 1] {
         [*self as u8]
@@ -75,6 +78,7 @@ packing_slice!(i8; 1);
 
 
 impl PackedStruct<[u8; 0]> for () {
+    const BYTES: usize = 0;
     #[inline]
     fn pack(&self) -> [u8; 0] {
         []

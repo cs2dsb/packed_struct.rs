@@ -8,6 +8,7 @@ use internal_prelude::v1::*;
 /// 
 /// 10 bits packs into: [0b00000011, 0b11111111]
 pub trait PackedStruct<B> where Self: Sized {
+    const BYTES: usize;
     /// Packs the structure into a byte array.
     fn pack(&self) -> B;
     /// Unpacks the structure from a byte array.

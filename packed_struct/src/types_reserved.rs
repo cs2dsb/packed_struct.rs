@@ -67,6 +67,7 @@ use packing::*;
 use types_bits::{NumberOfBits, NumberOfBytes, ByteArray};
 
 impl<V, B> PackedStruct<<<B as NumberOfBits>::Bytes as NumberOfBytes>::AsBytes> for ReservedBits<V, B> where Self: Default, V: ReservedBitValue, B: NumberOfBits {
+    const BYTES: usize = <<B as NumberOfBits>::Bytes as NumberOfBytes>::BYTES;
     fn pack(&self) -> <<B as NumberOfBits>::Bytes as NumberOfBytes>::AsBytes {
         <<<B as NumberOfBits>::Bytes as NumberOfBytes>::AsBytes>::new(V::get_reserved_bit_value_byte())
     }

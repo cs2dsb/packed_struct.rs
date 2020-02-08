@@ -106,6 +106,7 @@ pub fn derive_pack(parsed: &PackStruct) -> quote::Tokens {
     quote! {
         #type_documentation
         impl #impl_generics ::packed_struct::PackedStruct<[u8; #num_bytes]> for #name #ty_generics #where_clause {
+            const BYTES: usize = #num_bytes;
             #[inline]
             #[allow(unused_imports, unused_parens)]
             fn pack(&self) -> [u8; #num_bytes] {

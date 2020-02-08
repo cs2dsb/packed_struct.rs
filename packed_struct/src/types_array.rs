@@ -4,6 +4,7 @@ macro_rules! packable_u8_array {
     ($N: expr) => (
 
         impl PackedStruct<[u8; $N]> for [u8; $N] {
+            const BYTES: usize = $N;
             #[inline]
             fn pack(&self) -> [u8; $N] {
                 *self

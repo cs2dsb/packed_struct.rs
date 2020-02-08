@@ -22,6 +22,8 @@ pub trait BitsPartialBytes {}
 
 /// Number of bytes that the generic type should occupy.
 pub trait NumberOfBytes: Copy + Clone + Debug + Default {
+    const BYTES: usize;
+
     /// The byte array type that holds these bytes, for instance [u8; 2].
     type AsBytes: ByteArray;
 
@@ -44,6 +46,7 @@ macro_rules! bytes_type {
         pub struct $T;
 
         impl NumberOfBytes for $T {
+            const BYTES: usize = $N;
             type AsBytes = [u8; $N];
 
             #[inline]

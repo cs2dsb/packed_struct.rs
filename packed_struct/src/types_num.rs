@@ -545,6 +545,7 @@ impl<T, B, I> Display for MsbInteger<T, B, I> where I: Display {
 impl<T, B, I> PackedStruct<<<B as NumberOfBits>::Bytes as NumberOfBytes>::AsBytes> for MsbInteger<T, B, I>
     where B: NumberOfBits, I: SizedInteger<T, B>
 {
+    const BYTES: usize = <<B as NumberOfBits>::Bytes as NumberOfBytes>::BYTES;
     fn pack(&self) -> <<B as NumberOfBits>::Bytes as NumberOfBytes>::AsBytes {
         self.0.to_msb_bytes()
     }
@@ -625,6 +626,7 @@ impl<T, B, I> Display for LsbInteger<T, B, I> where I: Display {
 impl<T, B, I> PackedStruct<<<B as NumberOfBits>::Bytes as NumberOfBytes>::AsBytes> for LsbInteger<T, B, I>
     where B: NumberOfBits, I: SizedInteger<T, B>, B: BitsFullBytes
 {
+    const BYTES: usize = <<B as NumberOfBits>::Bytes as NumberOfBytes>::BYTES;
     fn pack(&self) -> <<B as NumberOfBits>::Bytes as NumberOfBytes>::AsBytes {
         self.0.to_lsb_bytes()        
     }
