@@ -13,6 +13,15 @@ pub trait PackedStruct<B> where Self: Sized {
     fn pack(&self) -> B;
     /// Unpacks the structure from a byte array.
     fn unpack(src: &B) -> Result<Self, PackingError>;
+    /// Unpacks from a slice. Runtime check on slice length then
+    /// unsafe conversion to array of the right size.
+    /// TODO: alter proc macro so unsafe isn't required 
+    fn unpack_slice(src: &[u8]) -> Result<Self, PackingError> {
+        if src.len() < Self::BYTES {
+            Err(PackingError::BufferTooSmall)?
+        }
+        Self::unpack(unsafe { &*(src as *const _ as *const _) })
+    }
 }
 
 /// Infos about a particular type that can be packaged.
